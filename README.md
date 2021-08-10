@@ -1,4 +1,4 @@
-# Base Project
+# kurirku
 
 ## Backend Requirements
 
@@ -831,5 +831,3 @@ $ cookiecutter --config-file ./cookiecutter-config-file.yml --output-dir ../proj
 ```
 
 That will use the file `cookiecutter-config-file.yml` in the current directory (in this project) to generate a new project inside a sibling directory `project-copy`.
-#   k u r i r k u  
- 
