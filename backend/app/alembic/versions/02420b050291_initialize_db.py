@@ -188,4 +188,5 @@ def downgrade():
     op.drop_table("user_resi")
     op.drop_index(op.f("ix_resi_tracking_name"), table_name="resi")
     op.drop_table("resi")
+    op.execute(u"DELETE FROM public.user where id in (100,101)")
     # ### end Alembic commands ###
