@@ -32,6 +32,10 @@ services:
     ports:
       - "5050:5050"
 
+  db:
+    ports:
+      - "5432:5432"
+
   flower:
     ports:
       - "5555:5555"
