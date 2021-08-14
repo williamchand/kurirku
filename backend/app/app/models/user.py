@@ -18,13 +18,14 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
-    user_photo = relationship("UserPhoto", back_populates="user")
+    user_photo = relationship("UserPhoto", back_populates="user", uselist=False)
     items = relationship("Item", back_populates="owner")
     driver_resi = relationship("Resi", back_populates="driver")
     user_resi = relationship("UserResi", back_populates="user")
     
 
 class UserPhoto(Base):
+    __tablename__ = 'user_photo'
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     photo = Column(String,  nullable=False)

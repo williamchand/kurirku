@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 
 from app.core.security import get_password_hash, verify_password
 from app.crud.base import CRUDBase
-from app.models.user import User
-from app.schemas.user import UserCreate, UserUpdate
+from app.models.user import User, UserPhoto
+from app.schemas.user import UserCreate, UserUpdate, UserPhotoUpdate, UserPhotoCreate
 
 
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
@@ -31,7 +31,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             update_data = obj_in
         else:
             update_data = obj_in.dict(exclude_unset=True)
-        if update_data["password"]:
+        if 'password' in update_data:
             hashed_password = get_password_hash(update_data["password"])
             del update_data["password"]
             update_data["hashed_password"] = hashed_password
@@ -53,3 +53,28 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
 
 
 user = CRUDUser(User)
+
+class CRUDUserPhoto(CRUDBase[UserPhoto, UserPhotoCreate, UserPhotoUpdate]):
+    def get_by_user_id(self, db: Session, *, user_id: int) -> Optional[UserPhoto]:
+        return db.query(UserPhoto).filter(UserPhoto.user_id == user_id).first()
+
+    def create(self, db: Session, *,user_id, obj_in: UserPhotoUpdate) -> UserPhoto:
+        db_obj = UserPhoto(
+            user_id=user_id,
+            photo=obj_in.photo
+        )
+        db.add(db_obj)
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+
+    def update(
+        self, db: Session, *, db_obj: UserPhoto, obj_in: Union[UserPhotoUpdate, Dict[str, Any]]
+    ) -> UserPhoto:
+        if isinstance(obj_in, dict):
+            update_data = obj_in
+        else:
+            update_data = obj_in.dict(exclude_unset=True)
+        return super().update(db, db_obj=db_obj, obj_in=update_data)
+
+user_photo = CRUDUserPhoto(UserPhoto)

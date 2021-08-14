@@ -151,3 +151,22 @@ def update_user(
         )
     user = crud.user.update(db, db_obj=user, obj_in=user_in)
     return user
+
+
+
+@router.patch("/photo", response_model=schemas.User)
+def update_user(
+    *,
+    db: Session = Depends(deps.get_db),
+    # user_id: int,
+    user_in: schemas.UserPhotoUpdate,
+    current_user: models.User = Depends(deps.get_current_active_user),
+) -> Any:
+    """
+    Update a user.
+    """
+    user_photo = crud.user_photo.get_by_user_id(db, user_id=current_user.id)
+    if not user_photo:
+        user_photo = crud.user_photo.create(db, user_id=current_user.id, obj_in=user_in)
+    user_photo = crud.user_photo.update(db, db_obj=user_photo, obj_in=user_in)
+    return current_user
