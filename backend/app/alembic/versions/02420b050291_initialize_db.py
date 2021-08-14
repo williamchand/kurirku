@@ -93,8 +93,8 @@ def upgrade():
     )
     op.bulk_insert(user_table,
         [
-            {'id':100, 'full_name':'Bernard Corrie', 'email': 'bernard.cor@gmail.com', 'password': get_password_hash('secret'), 'is_active': True, 'is_superuser': True },
-            {'id':101, 'full_name':'Priandi Poerot', 'email': 'priandi.poe@gmail.com', 'password': get_password_hash('secret'), 'is_active': True, 'is_superuser': True },
+            {'id':100, 'full_name':'Bernard Corrie', 'email': 'bernard.cor@gmail.com', 'hashed_password': get_password_hash('secret'), 'is_active': True, 'is_superuser': True },
+            {'id':101, 'full_name':'Priandi Poerot', 'email': 'priandi.poe@gmail.com', 'hashed_password': get_password_hash('secret'), 'is_active': True, 'is_superuser': True },
         ]
     )
     # Create an ad-hoc table to use for the insert statement.
