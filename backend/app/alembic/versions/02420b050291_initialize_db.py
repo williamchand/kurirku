@@ -21,7 +21,7 @@ def upgrade():
     op.create_table(
         "resi",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("tracking_name", sa.String(), nullable=True),
+        sa.Column("tracking_name", sa.String(), nullable=False),
         sa.Column("driver_id", sa.Integer(), nullable=True),
         sa.Column("redirect_url", sa.String(), nullable=True),
         sa.Column("maps_url", sa.String(), nullable=True),
