@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 
@@ -14,8 +14,8 @@ class UserBase(BaseModel):
     is_active: Optional[bool] = True
     is_superuser: bool = False
     full_name: Optional[str] = None
-
-
+    class Config:
+        orm_mode = True
 
 
 # Properties to receive via API on creation
