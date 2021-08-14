@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.schema import ForeignKey
 
 from app.db.base_class import Base
 
@@ -10,19 +11,13 @@ if TYPE_CHECKING:
 
 
 class Resi(Base):
-        sa.column("id", sa.Integer),
-        sa.column("tracking_name", sa.String),
-        sa.column("driver_id", sa.Integer),
-        sa.column("redirect_url", sa.String),
-        sa.column("maps_url", sa.String),
-        sa.column("sending_address", sa.String),
-        sa.column("receiving_address", sa.String),
-        sa.column("sending_country", sa.String),
-        sa.column("receiving_country", sa.String),
     id = Column(Integer, primary_key=True, index=True)
     tracking_name = Column(String, index=True)
-    email = Column(String, unique=True,  nullable=True)
-    hashed_password = Column(String, nullable=False)
-    is_active = Column(Boolean(), default=True)
-    is_superuser = Column(Boolean(), default=False)
-    items = relationship("Item", back_populates="owner")
+    driver_id = Column(Integer, ForeignKey("user.id"))
+    redirect_url = Column(String, nullable=True)
+    maps_url = Column(String, nullable=True)
+    sending_address = Column(String, nullable=True)
+    receiving_address = Column(String, nullable=True)
+    sending_country = Column(String, nullable=True)
+    receiving_country = Column(String, nullable=True)
+    driver = relationship("User", back_populates="resiList")
