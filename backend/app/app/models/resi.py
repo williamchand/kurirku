@@ -15,6 +15,7 @@ class Resi(Base):
     __tablename__ = 'resi'
     id = Column(Integer, primary_key=True, index=True)
     tracking_name = Column(String, index=True)
+    item_name = Column(String, nullable=True)
     driver_id = Column(Integer, ForeignKey("user.id"))
     redirect_url = Column(String, nullable=True)
     maps_url = Column(String, nullable=True)
@@ -30,6 +31,7 @@ class UserResi(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("user.id"))
     resi_id = Column(Integer, ForeignKey("resi.id"))
+    retrieve_timestamp = Column(TIMESTAMP, nullable=False)
     user = relationship("User", back_populates="user_resi")
     resi = relationship("Resi", back_populates="resi_user")
     user_resi_history = relationship("UserResiHistory", back_populates="user_resi")

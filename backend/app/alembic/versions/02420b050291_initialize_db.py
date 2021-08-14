@@ -22,6 +22,7 @@ def upgrade():
         "resi",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("tracking_name", sa.String(), nullable=False),
+        sa.Column("item_name", sa.String(), nullable=True),
         sa.Column("driver_id", sa.Integer(), nullable=True),
         sa.Column("redirect_url", sa.String(), nullable=True),
         sa.Column("maps_url", sa.String(), nullable=True),
@@ -38,6 +39,7 @@ def upgrade():
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("user_id", sa.Integer(), nullable=False),
         sa.Column("resi_id", sa.Integer(), nullable=False),
+        sa.Column("retrieve_timestamp", sa.TIMESTAMP(timezone=True), nullable=False),
         sa.ForeignKeyConstraint(["user_id"], ["user.id"],),
         sa.ForeignKeyConstraint(["resi_id"], ["resi.id"],),
         sa.PrimaryKeyConstraint("id"),
@@ -101,6 +103,7 @@ def upgrade():
     resi_table = sa.table('resi',
         sa.column("id", sa.Integer),
         sa.column("tracking_name", sa.String),
+        sa.column("item_name", sa.String),
         sa.column("driver_id", sa.Integer),
         sa.column("redirect_url", sa.String),
         sa.column("maps_url", sa.String),
@@ -114,6 +117,7 @@ def upgrade():
             {
                 'id':1, 
                 'tracking_name':'#1234567890121', 
+                'item_name': 'Monster hunter rise switch',
                 'driver_id': 100, 
                 'redirect_url': 'https://tlkm.me/Rs0UE3',
                 'maps_url': 'https://www.google.com/maps/dir/BEC+Bandung,+Babakan+Ciamis,+Kota+Bandung,+Jawa+Barat/-6.214259,106.825661/@-6.5687514,106.6706491,9z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x2e68e638014b2fb5:0xa4b89c31bfb434a!2m2!1d107.609327!2d-6.907893!1m0?hl=id', 
@@ -125,6 +129,7 @@ def upgrade():
             {
                 'id':2, 
                 'tracking_name':'#1234567890122', 
+                'item_name': 'Playstation 5',
                 'driver_id': 100, 
                 'redirect_url': 'https://tlkm.me/3xsPiF',
                 'maps_url': 'https://www.google.com/maps/dir/Jakarta+Hospital,+Jalan+Jendral+Sudirman,+RT.5%2FRW.4,+Karet+Semanggi,+South+Jakarta+City,+Jakarta/Pekanbaru+Mall,+Jalan+Jendral+Sudirman,+Rintis,+Pekanbaru+City,+Riau/@-2.8378113,99.6162959,6z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x2e69f15540a7c829:0xb9a495e45c494715!2m2!1d106.8161788!2d-6.2182371!1m5!1m1!1s0x31d5adbf53510149:0xf41bf35bbb0463a!2m2!1d101.4479579!2d0.5319514?hl=id', 
@@ -136,6 +141,7 @@ def upgrade():
             {
                 'id':3, 
                 'tracking_name':'#1234567890123', 
+                'item_name': 'TV LG U-3391n',
                 'driver_id': 101, 
                 'redirect_url': 'https://tlkm.me/XzzS38',
                 'maps_url': 'https://www.google.com/maps/dir/Mall+JAMTOS+Jambi+Town+Square,+Jalan+Kapt.+A.+Bakaruddin,+Simpang+III+Sipin,+Kota+Jambi,+Jambi/OB+Fitness+%26+Health+-+Moro+Purwokerto,+Kongsen,+Purwokerto+Kulon,+Kabupaten+Banyumas,+DKI+Jakarta/@-4.5109604,101.8662042,6z/data=!4m14!4m13!1m5!1m1!1s0x2e25887ce03fd26d:0x2f89f677b808cf39!2m2!1d103.5871484!2d-1.6214759!1m5!1m1!1s0x2e655e8677089787:0x1a4f76d8d5be4183!2m2!1d109.2416449!2d-7.4288938!5i1?hl=id', 
@@ -147,6 +153,7 @@ def upgrade():
             {
                 'id':4, 
                 'tracking_name':'#1234567890124', 
+                'item_name': 'Sharp Refrigerator 120X',
                 'driver_id': 101, 
                 'redirect_url': 'https://tlkm.me/yeTiIH',
                 'maps_url': 'https://www.google.com/maps/dir/Pontianak+Mall,+Jl.+Teuku+Umar,+Darat+Sekip,+Kec.+Pontianak+Kota,+Kota+Pontianak,+Kalimantan+Barat+78243/Monumen+Kapal+Selam,+Jalan+Pemuda,+Embong+Kaliasin,+Surabaya,+Jawa+Timur/@-3.5905815,106.5274174,6z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x2e1d5854111fd46d:0x3786f44dd7e8543!2m2!1d109.3356708!2d-0.0315003!1m5!1m1!1s0x2dd7f9628df520e5:0x577443720136fb0b!2m2!1d112.7502656!2d-7.2657627?hl=id', 
