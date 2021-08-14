@@ -43,7 +43,7 @@ class UserResiHistory(Base):
     __tablename__ = 'user_resi_history'
     id = Column(Integer, primary_key=True, index=True)
     user_resi_id = Column(Integer, ForeignKey("user_resi.id"), nullable=False)
-    status_id = Column(Integer, ForeignKey("status.id"), nullable=False)
+    status_id = Column(Integer, ForeignKey("status_resi.id"), nullable=False)
     created_timestamp = Column(TIMESTAMP, default=datetime.datetime.utcnow, nullable=False)
     user_resi = relationship("UserResi", back_populates="user_resi_history")
     status = relationship("StatusResi")
